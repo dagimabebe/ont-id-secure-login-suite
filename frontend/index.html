@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ONT Login Demo</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script type="module" src="app.js" defer></script>
+  <script type="module" src="https://unpkg.com/@onflow/ont-login-sdk@0.3.0/dist/index.esm.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="assets/logo.svg" alt="ONT Logo" class="logo" />
+      <h1>ONT ID Login</h1>
+    </header>
+
+    <main class="card">
+      <div id="auth-section">
+        <input type="text" id="antiPhishingInput" placeholder="Set anti-phishing phrase" maxlength="32"/>
+        <button id="loginBtn" class="btn primary">Login with ONT ID</button>
+        <div id="antiPhishingDisplay" class="phrase-display"></div>
+        <label class="toggle">
+          <input type="checkbox" id="previewToggle"/> Show Sign Data Preview
+        </label>
+        <button id="linkWalletBtn" class="btn secondary" style="display:none;">Link Another Wallet</button>
+      </div>
+
+      <div id="profileSection" style="display:none;">
+        <h2>Logged In</h2>
+        <div class="profile-grid">
+          <div><strong>Primary DID:</strong> <span id="primaryDid"></span></div>
+          <div><strong>Address:</strong> <span id="checksumAddr"></span></div>
+          <div><strong>Issued At:</strong> <span id="issuedAt"></span></div>
+          <div id="linkedSection">
+            <strong>Linked DID:</strong> <span id="linkedDid">None</span>
+            <button id="unlinkBtn" style="display:none;">Unlink</button>
+          </div>
+        </div>
+        <button id="logoutBtn" class="btn danger">Logout</button>
+      </div>
+    </main>
+
+    <div id="spinner" class="spinner-overlay" style="display:none;">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <div id="modal" class="modal" style="display:none;">
+    <div class="modal-card">
+      <h3>Review Sign Request</h3>
+      <div id="phishingBanner" class="phishing-banner"></div>
+      <pre id="signDataPreview" class="json-preview"></pre>
+      <div class="modal-actions">
+        <button id="cancelSign" class="btn secondary">Cancel</button>
+        <button id="confirmSign" class="btn primary">Confirm & Sign</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+</body>
+</html>
